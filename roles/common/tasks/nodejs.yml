@@ -27,3 +27,9 @@
   ansible.builtin.shell: npm install
   args:
     chdir: /app
+- name: load mongo schema
+  ansible.builtin.include_tasks:
+    file: schema_setup.yml
+- name: Include SystemD
+  ansible.builtin.import_tasks:
+    file: systemd_setup.yml
