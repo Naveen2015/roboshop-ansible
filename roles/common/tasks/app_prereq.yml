@@ -14,7 +14,7 @@
 
 - name: Add the user 'johnd' with a specific uid and a primary group of 'admin'
   ansible.builtin.user:
-    name: {{ application_user }}
+    name: ""{{ application_user }}"
 - name: Recursively remove directory
   ansible.builtin.file:
     path: /app
