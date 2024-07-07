@@ -26,7 +26,7 @@
     name: nginx
     state: installed
 - name: Copy roboshop config file to nginx
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: roboshop.conf
     dest: /etc/nginx/default.d/roboshop.conf
 - name: Recursively remove directory
