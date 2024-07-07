@@ -1,0 +1,18 @@
+#func_print_heading "Adding Application user"
+#id ${app_user}
+#if [ $? -ne 0 ]; then
+#useradd ${app_user}
+#fi
+#func_print_heading "creating application folder"
+#rm -rf /app
+#mkdir /app
+#func_print_heading "Downloading application content"
+#curl -L -o /tmp/${component_name}.zip https://roboshop-artifacts.s3.amazonaws.com/${component_name}.zip
+#cd /app
+#func_print_heading "unzipping application content"
+#unzip /tmp/${component_name}.zip
+
+- name: Add the user 'johnd' with a specific uid and a primary group of 'admin'
+  ansible.builtin.user:
+    name: { { application_user } }
+

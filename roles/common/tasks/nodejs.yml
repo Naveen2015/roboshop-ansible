@@ -1,0 +1,21 @@
+#func_print_heading "configuring and installing Nodejs"
+#dnf module disable nodejs -y
+#dnf module enable nodejs:18 -y
+#dnf install nodejs -y
+#func_stat_check $?
+#func_prereq
+#
+#
+#
+#func_print_heading "NPM install"
+#
+#npm install
+#func_systemd
+#
+#func_schema_setup
+
+- name: Install NodeJS version 18
+  ansible.builtin.dnf:
+    name: nodejs = 18
+    state: Installed
+
