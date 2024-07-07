@@ -16,7 +16,7 @@
 
 - name: Install NodeJS version 18
   ansible.builtin.dnf:
-    name: nodejs = 18
+    name: nodejs
     state: installed
 
 - name: Include task list in play
