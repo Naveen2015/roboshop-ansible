@@ -20,7 +20,7 @@
     state: installed
 
 - name: Include task list in play
-  ansible.builtin.include_tasks:
+  ansible.builtin.import_tasks:
     file: app_prereq.yml
 
 - name: Install NodeJS dependencies
@@ -28,7 +28,7 @@
   args:
     chdir: /app
 - name: load mongo schema
-  ansible.builtin.include_tasks:
+  ansible.builtin.import_tasks:
     file: schema_setup.yml
 - name: Include SystemD
   ansible.builtin.import_tasks:

@@ -17,5 +17,5 @@
         name: mongodb-org-shell
         state: installed
     - name: Load MySQL Schema
-      ansible.builtin.shell: mongo --host mongod-dev.kruthikadevops.online	</app/schema/{{component}}.js
+      ansible.builtin.shell: mongo --host {{ lookup('amazon.aws.aws_ssm', 'dev.catalogue.mongo_endpoint', region='us-east-1' ) }}	</app/schema/{{component}}.js
 
