@@ -18,4 +18,12 @@
         state: installed
     - name: Load MySQL Schema
       ansible.builtin.shell: mongo --host {{ lookup('amazon.aws.aws_ssm', 'dev.catalogue.mongo_endpoint', region='us-east-1' ) }}	</app/schema/{{component}}.js
-
+- name: Load Mysql Schema
+  when: schema_setup == "mysql"
+  block:
+    - name: Install Mysql client
+      ansible.builtin.yum:
+        name: mysql
+        state: installed
+    - name: Load MySQL Schema
+      ansible.builtin.shell: mysql -h {{ lookup('amazon.aws.aws_ssm', 'dev.shipping.mysql_endpoint', region='us-east-1' ) }} -u{{ lookup('amazon.aws.aws_ssm', 'dev.shipping.mysql_username', region='us-east-1' ) }} -p${{ lookup('amazon.aws.aws_ssm', 'dev.shipping.mysql_password', region='us-east-1' ) }} < /app/schema/{{component}}.sql
