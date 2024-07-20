@@ -1,3 +1,4 @@
-- name: Demo
-  ansible.builtin.debug:
-    msg: Component - Catalogue
+- name: Import common role for Python
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: payment_python
