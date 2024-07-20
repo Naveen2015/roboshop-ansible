@@ -1,0 +1,36 @@
+#func_print_heading "Installing Python"
+#dnf install python36 gcc python3-devel -y
+#func_stat_check $?
+#
+#
+#func_prereq
+#func_print_heading "Install python dependencies"
+#pip3.6 install -r requirements.txt
+#
+#
+#sed -i -e "s|rabbitmq_appuser_password|${rabbitmq_appuser_password}|" ${script_path}/payment.service
+#func_systemd
+
+- name: Install python
+  ansible.builtin.yum: python36; gcc python3-devel
+
+- name: Install Python packages
+  yum:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - python36
+      - gcc
+      - python3-devel
+  state: installed
+- name: Include task list in play
+  ansible.builtin.import_tasks:
+    file: app_prereq.yml
+
+- name: Install python dependencies
+  ansible.builtin.shell: pip3.6 install -r requirements.txt
+  args:
+    chdir: /app
+- name: Include SystemD
+  ansible.builtin.import_tasks:
+    file: systemd_setup.yml
